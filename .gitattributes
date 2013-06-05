@@ -1,0 +1,7 @@
+* text=auto
+
+*.yate text
+*.js text
+*.css text
+*.html text
+*.styl text

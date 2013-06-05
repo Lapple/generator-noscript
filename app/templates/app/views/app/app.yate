@@ -1,0 +1,5 @@
+match .view[ .name == 'app' ] ns-view {
+    <h1>
+        'Hello, noscript.'
+    </h1>
+}
