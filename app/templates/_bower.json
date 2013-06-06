@@ -2,7 +2,8 @@
   "name": "<%= projectName %>",
   "version": "0.0.1",
   "dependencies": {
-  	"noscript": "git://github.com/pasaran/noscript.git"
+    "noscript": "https://github.com/pasaran/noscript/archive/master.zip",
+    "jquery": "1.10.1"
   }
 }
 

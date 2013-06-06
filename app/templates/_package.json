@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "yate": "0.0.46",
+    "nommon": "0.0.17",
     "bower": "~0.9.2",
     "express": "~3.2.6",
     "grunt": "~0.4.1",

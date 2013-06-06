@@ -40,14 +40,16 @@ NoscriptGenerator.prototype.askFor = function askFor() {
 NoscriptGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/layouts');
-  this.mkdir('app/routes');
   this.mkdir('app/views');
   this.mkdir('app/views/app');
   this.mkdir('app/models');
   this.mkdir('app/actions');
 
   this.mkdir('server');
+  this.mkdir('server/pages');
+
   this.mkdir('vendor');
+  this.mkdir('public');
 
   this.template('_package.json', 'package.json');
   this.template('_bower.json', 'bower.json');
@@ -57,9 +59,12 @@ NoscriptGenerator.prototype.app = function app() {
   this.copy('Gruntfile.js', 'Gruntfile.js');
 
   this.copy('app/routes.js', 'app/routes.js');
+  this.copy('app/init.js', 'app/init.js');
   this.copy('app/layouts/main.js', 'app/layouts/main.js');
   this.copy('app/views/app/app.js', 'app/views/app/app.js');
   this.copy('app/views/app/app.yate', 'app/views/app/app.yate');
+
+  this.template('server/pages/index.html', 'server/pages/index.html');
 };
 
 NoscriptGenerator.prototype.projectfiles = function projectfiles() {

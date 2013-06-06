@@ -1,2 +1,4 @@
 node_modules
 _build
+vendor
+public/app.min.js
