@@ -64,7 +64,8 @@ NoscriptGenerator.prototype.app = function app() {
   this.copy('app/views/app/app.js', 'app/views/app/app.js');
   this.copy('app/views/app/app.yate', 'app/views/app/app.yate');
 
-  this.template('server/pages/index.html', 'server/pages/index.html');
+  this.template('server/server.js', 'server/server.js');
+  this.template('server/pages/index.yate', 'server/pages/index.yate');
 };
 
 NoscriptGenerator.prototype.projectfiles = function projectfiles() {

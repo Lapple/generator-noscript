@@ -1,18 +1,45 @@
 'use strict';
 
 var path = require('path');
+var child = require('child_process');
 
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-yate');
 
     grunt.initConfig({
 
         nommon: path.dirname(require.resolve('nommon')),
 
+        watch: {
+            options: {
+                interrupt: true
+            },
+            templates: {
+                files: [
+                    'app/views/**/*.yate'
+                ],
+                tasks: [
+                    'prepareYate',
+                    'yate:templates',
+                    'concat',
+                    'uglify'
+                ]
+            },
+            js: {
+                files: [
+                    'app/**/*.js'
+                ],
+                tasks: [
+                    'concat',
+                    'uglify'
+                ]
+            }
+        },
         prepareYate: {
             templates: {
                 files: {
@@ -24,13 +51,32 @@ module.exports = function (grunt) {
             }
         },
         yate: {
+            options: {
+                runtime: true
+            },
             templates: {
-                options: {
-                    runtime: true
-                },
                 files: {
                     '_build/templates.js': '_build/_templates.yate'
                 }
+            },
+            pages: {
+                options: {
+                    autorun: true,
+                    // TODO: Optimize
+                    postprocess: function(code) {
+                        return code.replace(
+                            'return function(data) { return yr.run("main", data); };',
+                            'module.exports = function (data) { return yr.run("main", data); };'
+                        );
+                    }
+                },
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: 'server/pages/*.yate',
+                    dest: '_build/pages',
+                    ext: '.js'
+                }]
             }
         },
         concat: {
@@ -90,6 +136,12 @@ module.exports = function (grunt) {
                 dest: 'public/app.min.js'
             }
         },
+        express: {
+            options: {
+                main: 'server/server.js',
+                port: 3000
+            }
+        },
         clean: {
             prebuild: [
                 '_build'
@@ -110,11 +162,11 @@ module.exports = function (grunt) {
         'clean:postbuild'
     ]);
 
-    grunt.registerTask('watch', function () {
-    });
-
-    grunt.registerTask('server', function () {
-    });
+    grunt.registerTask('server', [
+        'build',
+        'express',
+        'watch'
+    ]);
 
     grunt.registerMultiTask('prepareYate', function () {
         this.files.forEach(function (f) {
@@ -124,5 +176,25 @@ module.exports = function (grunt) {
 
             grunt.log.writeln('File ' + f.dest.cyan + ' created.');
         });
+    });
+
+    grunt.registerTask('express', function () {
+        var options = this.options();
+
+        var server = child.spawn('node', [
+            options.main,
+            '--port',
+            options.port
+        ]);
+
+        server.stdout.on('data', function (data) {
+            console.log('\n' + '[express]'.yellow + '\n%s', data);
+        });
+
+        server.stderr.on('data', function (data) {
+            console.error('\n' + '[express]'.red + '\n%s', data);
+        });
+
+        process.on('exit', server.kill);
     });
 };
