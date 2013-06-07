@@ -12,7 +12,7 @@ var ViewGenerator = module.exports = function ViewGenerator(args, options, confi
   this.viewName = _s.camelize(this.name);
 
   this.on('end', function () {
-    console.log('+ model ' + this.viewName.green);
+    console.log('+ view ' + this.viewName.green);
   }.bind(this));
 };
 
