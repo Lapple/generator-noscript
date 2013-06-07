@@ -46,17 +46,9 @@ NoscriptGenerator.prototype.app = function app() {
   this.mkdir('app/actions');
 
   this.mkdir('server');
-  this.mkdir('server/pages');
+  this.mkdir('server/views');
 
   this.mkdir('vendor');
-  this.mkdir('public');
-
-  this.template('_package.json', 'package.json');
-  this.template('_bower.json', 'bower.json');
-  this.template('_README.md', 'README.md');
-  this.template('bowerrc', '.bowerrc');
-
-  this.copy('Gruntfile.js', 'Gruntfile.js');
 
   this.copy('app/routes.js', 'app/routes.js');
   this.copy('app/init.js', 'app/init.js');
@@ -65,10 +57,18 @@ NoscriptGenerator.prototype.app = function app() {
   this.copy('app/views/app/app.yate', 'app/views/app/app.yate');
 
   this.template('server/server.js', 'server/server.js');
-  this.template('server/pages/index.yate', 'server/pages/index.yate');
+  this.template('server/index.js', 'server/index.js');
+  this.template('server/views/index.yate', 'server/views/index.yate');
 };
 
 NoscriptGenerator.prototype.projectfiles = function projectfiles() {
+  this.template('_package.json', 'package.json');
+  this.template('_bower.json', 'bower.json');
+  this.template('_README.md', 'README.md');
+  this.template('bowerrc', '.bowerrc');
+
+  this.copy('Gruntfile.js', 'Gruntfile.js');
+
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
   this.copy('gitignore', '.gitignore');

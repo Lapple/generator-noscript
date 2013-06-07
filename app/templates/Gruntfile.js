@@ -56,27 +56,8 @@ module.exports = function (grunt) {
             },
             templates: {
                 files: {
-                    '_build/templates.js': '_build/_templates.yate'
+                    '_build/js/templates.js': '_build/_templates.yate'
                 }
-            },
-            pages: {
-                options: {
-                    autorun: true,
-                    // TODO: Optimize
-                    postprocess: function(code) {
-                        return code.replace(
-                            'return function(data) { return yr.run("main", data); };',
-                            'module.exports = function (data) { return yr.run("main", data); };'
-                        );
-                    }
-                },
-                files: [{
-                    expand: true,
-                    flatten: true,
-                    src: 'server/pages/*.yate',
-                    dest: '_build/pages',
-                    ext: '.js'
-                }]
             }
         },
         concat: {
@@ -85,7 +66,7 @@ module.exports = function (grunt) {
                     separator: ';'
                 },
                 files: {
-                    '_build/app.js': [
+                    '_build/js/app.js': [
                         'app/routes.js',
                         'app/models/**/*.js',
                         'app/layouts/*.js',
@@ -93,7 +74,7 @@ module.exports = function (grunt) {
                         'app/actions/**/*.js',
                         'app/init.js'
                     ],
-                    '_build/components.js': [
+                    '_build/js/components.js': [
                         'vendor/jquery/jquery.js',
 
                         // Nommon section.
@@ -129,11 +110,11 @@ module.exports = function (grunt) {
         uglify: {
             js: {
                 src: [
-                    '_build/components.js',
-                    '_build/templates.js',
-                    '_build/app.js'
+                    '_build/js/components.js',
+                    '_build/js/templates.js',
+                    '_build/js/app.js'
                 ],
-                dest: 'public/app.min.js'
+                dest: '_build/js/app.min.js'
             }
         },
         express: {
@@ -171,7 +152,7 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('prepareYate', function () {
         this.files.forEach(function (f) {
             grunt.file.write(f.dest, f.src.map(function (p) {
-                return 'include "' + path.resolve(__dirname, p) + '"';
+                return 'include "' + path.join(__dirname, p) + '"';
             }).join(grunt.util.linefeed));
 
             grunt.log.writeln('File ' + f.dest.cyan + ' created.');
