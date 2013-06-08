@@ -63,6 +63,7 @@ NoscriptGenerator.prototype.app = function app() {
   this.mkdir('server/models');
 
   this.mkdir('vendor');
+  this.mkdir('styles');
 
   this.copy('app/routes.js', 'app/routes.js');
   this.copy('app/init.js', 'app/init.js');
@@ -72,7 +73,9 @@ NoscriptGenerator.prototype.app = function app() {
   this.copy('app/views/not-found/not-found.js', 'app/views/not-found/not-found.js');
   this.copy('app/views/not-found/not-found.yate', 'app/views/not-found/not-found.yate');
   this.copy('app/views/welcome/welcome.js', 'app/views/welcome/welcome.js');
-  this.copy('app/views/welcome/welcome.yate', 'app/views/welcome/welcome.yate');
+  this.template('app/views/welcome/welcome.yate', 'app/views/welcome/welcome.yate');
+
+  this.copy('styles/main.styl', 'styles/main.styl');
 
   this.template('server/server.js', 'server/server.js');
   this.template('server/index.js', 'server/index.js');

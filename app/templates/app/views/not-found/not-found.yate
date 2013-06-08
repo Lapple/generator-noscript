@@ -1,5 +1,32 @@
 match .notFound ns-view-content {
-    <h1>
-        'Page not found.'
-    </h1>
+    <div class="welcome">
+        <h1 class="welcome__title">
+            "Page not found."
+        </h1>
+        <p class="welcome__paragraph">
+            "This is a sample ns.View"
+            " template content. The HTML is located in "
+            "app/views/not-found/not-found.yate."
+        </p>
+        <p class="welcome__paragraph">
+            "Tip of the day: in cases when no layout matches a given URL, "
+            "noscript populates the page with a special layout called "
+            "`not-found`. This layout can be found in app/layouts/not-found.js."
+        </p>
+        <p class="welcome__paragraph">
+            <a class="welcome__link">
+                @href = "https://github.com/pasaran/noscript"
+                @title = "Noscript project page"
+                @target = "_blank"
+                "Noscript"
+            </a>
+            " &diamond; "
+            <a class="welcome__link">
+                @href = "https://github.com/pasaran/yate"
+                @title = "Yate project page"
+                @target = "_blank"
+                "Yate"
+            </a>
+        </p>
+    </div>
 }

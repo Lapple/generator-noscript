@@ -21,13 +21,17 @@ app.set('port', argv.port || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'yate');
 
+app.configure('development', function () {
+    app.set('livereload', argv.livereload || 35729);
+});
+
 app.use(express.compress());
 app.use(express.methodOverride());
 app.use(express.bodyParser());
-app.use(express.static(path.join(__dirname, '..', '_build')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.post('/models/', require('./models'));
-app.get('/*', require('./index'));
+app.post('models/', require('./models'));
+app.get('*', require('./index'));
 
 app.listen(app.get('port'));
 console.log('Listening on port %s', app.get('port'));

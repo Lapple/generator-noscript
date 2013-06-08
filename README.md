@@ -5,9 +5,9 @@ A [noscript](https://github.com/pasaran/noscript/) project generator for Yeoman.
 
 ## Getting started
 
-Make sure you have [yo](https://github.com/yeoman/yo) installed:
+Make sure you have [yo](https://github.com/yeoman/yo), [grunt-cli](https://github.com/gruntjs/grunt-cli) and [bower](https://github.com/bower/bower) installed:
 
-    npm install -g yo
+    npm install -g yo grunt-cli bower
 
 Install the generator:
 
@@ -17,7 +17,9 @@ Make a new directory and `cd` into it:
 
     mkdir new-ns-project && cd $_
 
-Run `yo noscript` and answer some prompts.
+Run `yo noscript` and answer some prompts. After the dependencieas are
+installed run `grunt build` to assemble the project or `grunt server` to
+start local development server.
 
 ## Generators
 
@@ -53,6 +55,7 @@ app. Sets up the following folder structure:
   index.js      - main application template renderer
 
 /vendor         Folder, containing bower-installed dependencies
+/styles         Project CSS written in Stylus
 
 package.json
 bower.json
@@ -64,7 +67,13 @@ Grunfile.js
 - `grunt build` assembles the project, building templates and concatenating
 scripts,
 - `grunt server` builds the project and starts up a local instance
-of [express](https://github.com/visionmedia/express) server with livereload.
+of express server with livereload.
+
+The generated app will use:
+
+- [Yate](https://github.com/pasaran/yate/) for templates,
+- [Stylus](https://github.com/learnboost/stylus) for CSS preprocessing,
+- [Express](https://github.com/visionmedia/express) as backend router and server.
 
 Example:
 

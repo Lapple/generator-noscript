@@ -7,13 +7,16 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-yate');
 
     grunt.initConfig({
 
         nommon: path.dirname(require.resolve('nommon')),
+        livereload: 35729,
 
         watch: {
             options: {
@@ -24,8 +27,7 @@ module.exports = function (grunt) {
                     'app/views/**/*.yate'
                 ],
                 tasks: [
-                    'yate:templates',
-                    'concat'
+                    'yate:templates'
                 ]
             },
             views: {
@@ -41,8 +43,29 @@ module.exports = function (grunt) {
                     'app/**/*.js'
                 ],
                 tasks: [
-                    'concat'
+                    'concat:js'
                 ]
+            },
+            styles: {
+                files: [
+                    'styles/**/*.styl'
+                ],
+                tasks: [
+                    'stylus',
+                    'concat:css'
+                ]
+            },
+            livereload: {
+                files: [
+                    'public/js/*.js',
+                    'public/css/*.css',
+                    'server/views/*.tmpl.js',
+                    '!public/js/*.min.js',
+                    '!public/css/*.min.css',
+                ],
+                options: {
+                    livereload: '<%= livereload %>'
+                }
             }
         },
         yate: {
@@ -51,7 +74,7 @@ module.exports = function (grunt) {
             },
             templates: {
                 files: {
-                    '_build/js/templates.js': [
+                    'public/js/templates.js': [
                         'vendor/noscript/yate/*.yate',
                         'app/views/**/*.yate'
                     ]
@@ -70,13 +93,27 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        stylus: {
+            options: {
+                'include css': true,
+                compress: false,
+                import: [
+                    'nib'
+                ]
+            },
+            main: {
+                files: {
+                    'public/css/main.css': 'styles/main.styl'
+                }
+            }
+        },
         concat: {
             js: {
                 options: {
                     separator: ';'
                 },
                 files: {
-                    '_build/js/app.js': [
+                    'public/js/app.js': [
                         'app/routes.js',
                         'app/models/**/*.js',
                         'app/layouts/*.js',
@@ -84,7 +121,7 @@ module.exports = function (grunt) {
                         'app/actions/**/*.js',
                         'app/init.js'
                     ],
-                    '_build/js/components.js': [
+                    'public/js/components.js': [
                         'vendor/jquery/jquery.js',
 
                         // Nommon section.
@@ -115,16 +152,35 @@ module.exports = function (grunt) {
                         'vendor/noscript/src/ns.view.js'
                     ]
                 }
+            },
+            css: {
+                files: {
+                    'public/css/main.css': [
+                        'vendor/noscript/css/*.css',
+                        'public/css/main.css'
+                    ]
+                }
             }
         },
         uglify: {
             js: {
                 src: [
-                    '_build/js/components.js',
-                    '_build/js/templates.js',
-                    '_build/js/app.js'
+                    'public/js/components.js',
+                    'public/js/templates.js',
+                    'public/js/app.js'
                 ],
-                dest: '_build/js/app.min.js'
+                dest: 'public/js/app.min.js'
+            }
+        },
+        cssmin: {
+            css: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    ext: '.min.css',
+                    src: 'public/css/*.css',
+                    dest: 'public/css/'
+                }]
             }
         },
         express: {
@@ -134,27 +190,29 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            prebuild: [
-                '_build',
+            build: [
+                'public/js/*.js',
+                'public/css/*.css',
                 'server/views/*.tmpl.js'
-            ],
-            postbuild: [
-                '_build/_*.{js,yate}'
             ]
         }
 
     });
 
     grunt.registerTask('build', [
-        'clean:prebuild',
+        'clean',
         'yate',
+        'stylus',
         'concat',
         'uglify',
-        'clean:postbuild'
+        'cssmin'
     ]);
 
     grunt.registerTask('server', [
-        'build',
+        'clean',
+        'yate',
+        'stylus',
+        'concat',
         'express',
         'watch'
     ]);
@@ -165,7 +223,9 @@ module.exports = function (grunt) {
         var server = child.spawn('node', [
             options.main,
             '--port',
-            options.port
+            options.port,
+            '--livereload',
+            grunt.config('livereload')
         ]);
 
         server.stdout.on('data', function (data) {

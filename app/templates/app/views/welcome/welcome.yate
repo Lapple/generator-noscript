@@ -1,5 +1,32 @@
 match .welcome ns-view-content {
-    <h1>
-        'Welcome to noscript.'
-    </h1>
+    <div class="welcome">
+        <h1 class="welcome__title">
+            "Welcome to <%= projectName %>."
+        </h1>
+        <p class="welcome__paragraph">
+            "This is a sample ns.View"
+            " template content. The HTML is located in "
+            "app/views/welcome/welcome.yate."
+        </p>
+        <p class="welcome__paragraph">
+            "To start developing your own application take "
+            "a look at the routes file (app/routes.js) where the "
+            "current URL matches ns.Layout."
+        </p>
+        <p class="welcome__paragraph">
+            <a class="welcome__link">
+                @href = "https://github.com/pasaran/noscript"
+                @title = "Noscript project page"
+                @target = "_blank"
+                "Noscript"
+            </a>
+            " &diamond; "
+            <a class="welcome__link">
+                @href = "https://github.com/pasaran/yate"
+                @title = "Yate project page"
+                @target = "_blank"
+                "Yate"
+            </a>
+        </p>
+    </div>
 }
