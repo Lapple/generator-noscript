@@ -83,7 +83,8 @@ Example:
 ### View
 
 Generates `ns.View` definition with a corresponding
-[Yate](https://github.com/pasaran/yate/) template.
+[Yate](https://github.com/pasaran/yate/) template. Note that dasherized or
+underscored names are camel-cased as per convention.
 
 Example:
 
