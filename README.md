@@ -64,7 +64,7 @@ Grunfile.js
 - `grunt build` assembles the project, building templates and concatenating
 scripts,
 - `grunt server` builds the project and starts up a local instance
-of `express` server with livereload.
+of [express](https://github.com/visionmedia/express) server with livereload.
 
 Example:
 
