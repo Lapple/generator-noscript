@@ -24,10 +24,17 @@ module.exports = function (grunt) {
                     'app/views/**/*.yate'
                 ],
                 tasks: [
-                    'prepareYate',
                     'yate:templates',
                     'concat',
                     'uglify'
+                ]
+            },
+            views: {
+                files: [
+                    'server/views/*.yate'
+                ],
+                tasks: [
+                    'yate:server'
                 ]
             },
             js: {
@@ -40,24 +47,29 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        prepareYate: {
-            templates: {
-                files: {
-                    '_build/_templates.yate': [
-                        'vendor/noscript/yate/*.yate',
-                        'app/views/**/*.yate'
-                    ]
-                }
-            }
-        },
         yate: {
             options: {
                 runtime: true
             },
             templates: {
                 files: {
-                    '_build/js/templates.js': '_build/_templates.yate'
+                    '_build/js/templates.js': [
+                        'vendor/noscript/yate/*.yate',
+                        'app/views/**/*.yate'
+                    ]
                 }
+            },
+            server: {
+                options: {
+                    modular: true
+                },
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: 'server/views/*.yate',
+                    dest: 'server/views/',
+                    ext: '.tmpl.js'
+                }]
             }
         },
         concat: {
@@ -125,7 +137,8 @@ module.exports = function (grunt) {
         },
         clean: {
             prebuild: [
-                '_build'
+                '_build',
+                'server/views/*.tmpl.js'
             ],
             postbuild: [
                 '_build/_*.{js,yate}'
@@ -136,7 +149,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:prebuild',
-        'prepareYate',
         'yate',
         'concat',
         'uglify',
@@ -148,16 +160,6 @@ module.exports = function (grunt) {
         'express',
         'watch'
     ]);
-
-    grunt.registerMultiTask('prepareYate', function () {
-        this.files.forEach(function (f) {
-            grunt.file.write(f.dest, f.src.map(function (p) {
-                return 'include "' + path.join(__dirname, p) + '"';
-            }).join(grunt.util.linefeed));
-
-            grunt.log.writeln('File ' + f.dest.cyan + ' created.');
-        });
-    });
 
     grunt.registerTask('express', function () {
         var options = this.options();

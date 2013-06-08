@@ -1,4 +1,6 @@
 ns.Model.define('<%= modelName %>', {
     params: {},
-    methods: {}
+    methods: {
+        // <%= modelName %> prototype methods...
+    }
 });

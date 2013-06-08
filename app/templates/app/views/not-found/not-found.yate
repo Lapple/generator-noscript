@@ -1,0 +1,5 @@
+match .notFound ns-view-content {
+    <h1>
+        'Page not found.'
+    </h1>
+}

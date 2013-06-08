@@ -1,5 +1,9 @@
-ns.Model.define('<%= viewName %>', {
+ns.View.define('<%= viewName %>', {
     models: [],
-    events: {},
-    methods: {}
+    events: {
+        // <%= viewName %> events...
+    },
+    methods: {
+        // <%= viewName %> prototype methods...
+    }
 });

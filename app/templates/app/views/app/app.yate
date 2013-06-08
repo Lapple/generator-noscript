@@ -1,5 +1,0 @@
-match .app ns-view-content {
-    <h1>
-        'Hello, noscript.'
-    </h1>
-}

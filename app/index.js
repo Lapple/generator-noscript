@@ -19,7 +19,16 @@ util.inherits(NoscriptGenerator, yeoman.generators.Base);
 NoscriptGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
-  console.log('Noscript Generator');
+  var welcome = [
+    '                               _       __ ',
+    '   ' + '____'.yellow + '  ____  ' + '_____'.yellow + '__________(_)___  / /_',
+    '  ' + '/ __ \\'.yellow + '/ __ \\' + '/ ___/'.yellow + ' ___/ ___/ / __ \\/ __/',
+    ' / / / /'.yellow + ' /_/ ' + '(__  )'.yellow + ' /__/ /  / / /_/ / /_  ',
+    '/_/ /_/'.yellow + '\\____' + '/____/'.yellow + '\\___/_/  /_/ .___/\\__/  ',
+    '                            /_/           '
+  ].join('\n');
+
+  console.log(welcome);
 
   var prompts = [{
     name: 'projectName',
@@ -39,11 +48,11 @@ NoscriptGenerator.prototype.askFor = function askFor() {
 
 NoscriptGenerator.prototype.app = function app() {
   this.mkdir('app');
-  this.mkdir('app/layouts');
   this.mkdir('app/views');
-  this.mkdir('app/views/app');
   this.mkdir('app/models');
   this.mkdir('app/actions');
+  this.mkdir('app/layouts');
+  this.mkdir('app/components');
 
   this.mkdir('server');
   this.mkdir('server/views');
@@ -53,8 +62,12 @@ NoscriptGenerator.prototype.app = function app() {
   this.copy('app/routes.js', 'app/routes.js');
   this.copy('app/init.js', 'app/init.js');
   this.copy('app/layouts/main.js', 'app/layouts/main.js');
+  this.copy('app/layouts/not-found.js', 'app/layouts/not-found.js');
   this.copy('app/views/app/app.js', 'app/views/app/app.js');
-  this.copy('app/views/app/app.yate', 'app/views/app/app.yate');
+  this.copy('app/views/not-found/not-found.js', 'app/views/not-found/not-found.js');
+  this.copy('app/views/not-found/not-found.yate', 'app/views/not-found/not-found.yate');
+  this.copy('app/views/welcome/welcome.js', 'app/views/welcome/welcome.js');
+  this.copy('app/views/welcome/welcome.yate', 'app/views/welcome/welcome.yate');
 
   this.template('server/server.js', 'server/server.js');
   this.template('server/index.js', 'server/index.js');

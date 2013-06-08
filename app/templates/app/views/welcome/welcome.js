@@ -1,0 +1,1 @@
+ns.View.define('welcome');

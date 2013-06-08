@@ -1,0 +1,3 @@
+match .<%= viewName %> ns-view-content {
+    // View HTML...
+}

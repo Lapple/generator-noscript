@@ -1,3 +1,5 @@
 node_modules
 _build
 vendor
+
+server/views/*.tmpl.js

@@ -6,9 +6,12 @@ var argv = require('optimist').argv;
 
 var app = express();
 
-app.engine('yate', function (path, data, callback) {
+app.engine('yate', function (file, data, callback) {
     try {
-        callback(null, yate.run(path, { data: data }));
+        var compiled = path.basename(file, '.yate') + '.tmpl.js';
+        var template = require(path.join(path.dirname(file), compiled));
+
+        callback(null, template(data));
     } catch (err) {
         callback(err, null);
     }

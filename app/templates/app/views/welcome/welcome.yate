@@ -1,0 +1,5 @@
+match .welcome ns-view-content {
+    <h1>
+        'Welcome to noscript.'
+    </h1>
+}
