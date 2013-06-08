@@ -21,13 +21,31 @@ describe('noscript generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      // add files you expect to exist here.
+      'app/routes.js',
+      'app/init.js',
+      'app/layouts/main.js',
+      'app/layouts/not-found.js',
+      'app/views/app/app.js',
+      'app/views/not-found/not-found.js',
+      'app/views/not-found/not-found.yate',
+      'app/views/welcome/welcome.js',
+      'app/views/welcome/welcome.yate',
+      'server/server.js',
+      'server/index.js',
+      'server/models.js',
+      'server/views/index.yate',
+      'package.json',
+      'bower.json',
+      'README.md',
+      'Gruntfile.js',
+      '.bowerrc',
+      '.gitignore',
       '.jshintrc',
       '.editorconfig'
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': 'Y'
+      'projectName': 'test'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
