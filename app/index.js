@@ -11,6 +11,10 @@ var NoscriptGenerator = module.exports = function NoscriptGenerator(args, option
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
+  this.on('error', function (err) {
+    this.log.error(err.message || err);
+  });
+
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
@@ -21,10 +25,10 @@ NoscriptGenerator.prototype.askFor = function askFor() {
 
   var welcome = [
     '                               _       __ ',
-    '   ' + '____'.yellow + '  ____  ' + '_____'.yellow + '__________(_)___  / /_',
-    '  ' + '/ __ \\'.yellow + '/ __ \\' + '/ ___/'.yellow + ' ___/ ___/ / __ \\/ __/',
-    ' / / / /'.yellow + ' /_/ ' + '(__  )'.yellow + ' /__/ /  / / /_/ / /_  ',
-    '/_/ /_/'.yellow + '\\____' + '/____/'.yellow + '\\___/_/  /_/ .___/\\__/  ',
+    '   ' + '____'.bold + '  ____  ' + '_____'.bold + '__________(_)___  / /_',
+    '  ' + '/ __ \\'.bold + '/ __ \\' + '/ ___/'.bold + ' ___/ ___/ / __ \\/ __/',
+    ' / / / /'.bold + ' /_/ ' + '(__  )'.bold + ' /__/ /  / / /_/ / /_  ',
+    '/_/ /_/'.bold + '\\____' + '/____/'.bold + '\\___/_/  /_/ .___/\\__/  ',
     '                            /_/           '
   ].join('\n');
 
@@ -56,6 +60,7 @@ NoscriptGenerator.prototype.app = function app() {
 
   this.mkdir('server');
   this.mkdir('server/views');
+  this.mkdir('server/models');
 
   this.mkdir('vendor');
 
@@ -71,6 +76,7 @@ NoscriptGenerator.prototype.app = function app() {
 
   this.template('server/server.js', 'server/server.js');
   this.template('server/index.js', 'server/index.js');
+  this.template('server/models.js', 'server/models.js');
   this.template('server/views/index.yate', 'server/views/index.yate');
 };
 

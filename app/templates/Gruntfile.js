@@ -25,8 +25,7 @@ module.exports = function (grunt) {
                 ],
                 tasks: [
                     'yate:templates',
-                    'concat',
-                    'uglify'
+                    'concat'
                 ]
             },
             views: {
@@ -42,8 +41,7 @@ module.exports = function (grunt) {
                     'app/**/*.js'
                 ],
                 tasks: [
-                    'concat',
-                    'uglify'
+                    'concat'
                 ]
             }
         },

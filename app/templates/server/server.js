@@ -21,9 +21,12 @@ app.set('port', argv.port || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'yate');
 
+app.use(express.compress());
+app.use(express.methodOverride());
+app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname, '..', '_build')));
 
-// app.post('/models', require('./models'));
+app.post('/models/', require('./models'));
 app.get('/*', require('./index'));
 
 app.listen(app.get('port'));

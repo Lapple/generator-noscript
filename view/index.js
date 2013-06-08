@@ -11,9 +11,11 @@ var ViewGenerator = module.exports = function ViewGenerator(args, options, confi
   this.fileName = _s.dasherize(this.name).replace(/^\-/, '');
   this.viewName = _s.camelize(this.name);
 
-  this.on('end', function () {
-    console.log('+ view ' + this.viewName.green);
-  }.bind(this));
+  if (this.name !== this.viewName) {
+    this.log.info('converting %s to %s as per convention', this.name, this.viewName);
+  }
+
+  this.log.create('view ' + this.viewName);
 };
 
 util.inherits(ViewGenerator, yeoman.generators.NamedBase);

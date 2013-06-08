@@ -11,13 +11,16 @@ var ModelGenerator = module.exports = function ModelGenerator(args, options, con
   this.fileName = _s.dasherize(this.name).replace(/^\-/, '');
   this.modelName = _s.camelize(this.name);
 
-  this.on('end', function () {
-    console.log('+ model ' + this.modelName.green);
-  }.bind(this));
+  if (this.name !== this.modelName) {
+    this.log.info('converting %s to %s as per convention', this.name, this.modelName);
+  }
+
+  this.log.create('model ' + this.modelName);
 };
 
 util.inherits(ModelGenerator, yeoman.generators.NamedBase);
 
 ModelGenerator.prototype.files = function files() {
   this.template('_model.js', path.join('app/models', this.fileName + '.js'));
+  this.template('_model-server.js', path.join('server/models', this.fileName + '.js'));
 };
