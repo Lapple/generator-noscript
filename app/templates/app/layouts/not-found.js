@@ -1,7 +1,7 @@
 ns.layout.define('not-found', {
 
-    'app': {
+    <% if (bare) { %>'app': {}<% } else { %>'app': {
         'notFound': true
-    }
+    }<% } %>
 
 });

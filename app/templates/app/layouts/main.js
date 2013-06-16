@@ -2,9 +2,9 @@ ns.layout.define('main', {
 
     // The `app` view should serve as a root of
     // any layout.
-    'app': {
+    <% if (bare) { %>'app': {}<% } else { %>'app': {
         'welcome': true
-    }
+    }<% } %>
 
     // Sample layout:
     //

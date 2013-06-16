@@ -34,10 +34,18 @@ NoscriptGenerator.prototype.askFor = function askFor() {
 
   console.log(welcome);
 
-  var prompts = [{
-    name: 'projectName',
-    message: 'Project name:'
-  }];
+  var prompts = [
+    {
+      name: 'projectName',
+      message: 'Project name:'
+    },
+    {
+      type: 'confirm',
+      name: 'bare',
+      message: 'Generate bare project without sample views?',
+      default: 'Y/n'
+    }
+  ];
 
   this.prompt(prompts, function (err, props) {
     if (err) {
@@ -45,6 +53,7 @@ NoscriptGenerator.prototype.askFor = function askFor() {
     }
 
     this.projectName = props.projectName;
+    this.bare = /y/gi.test(props.bare);
 
     cb();
   }.bind(this));
@@ -68,15 +77,18 @@ NoscriptGenerator.prototype.app = function app() {
   this.copy('app/routes.js', 'app/routes.js');
   this.copy('app/init.js', 'app/init.js');
   this.template('app/page.js', 'app/page.js');
-  this.copy('app/layouts/main.js', 'app/layouts/main.js');
-  this.copy('app/layouts/not-found.js', 'app/layouts/not-found.js');
+  this.template('app/layouts/main.js', 'app/layouts/main.js');
+  this.template('app/layouts/not-found.js', 'app/layouts/not-found.js');
   this.copy('app/views/app/app.js', 'app/views/app/app.js');
-  this.copy('app/views/not-found/not-found.js', 'app/views/not-found/not-found.js');
-  this.copy('app/views/not-found/not-found.yate', 'app/views/not-found/not-found.yate');
-  this.copy('app/views/welcome/welcome.js', 'app/views/welcome/welcome.js');
-  this.template('app/views/welcome/welcome.yate', 'app/views/welcome/welcome.yate');
 
-  this.copy('styles/main.styl', 'styles/main.styl');
+  if (!this.bare) {
+    this.copy('app/views/welcome/welcome.js', 'app/views/welcome/welcome.js');
+    this.template('app/views/welcome/welcome.yate', 'app/views/welcome/welcome.yate');
+    this.copy('app/views/not-found/not-found.js', 'app/views/not-found/not-found.js');
+    this.copy('app/views/not-found/not-found.yate', 'app/views/not-found/not-found.yate');
+  }
+
+  this.template('styles/main.styl', 'styles/main.styl');
 
   this.template('server/server.js', 'server/server.js');
   this.template('server/index.js', 'server/index.js');
