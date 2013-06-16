@@ -67,6 +67,7 @@ NoscriptGenerator.prototype.app = function app() {
 
   this.copy('app/routes.js', 'app/routes.js');
   this.copy('app/init.js', 'app/init.js');
+  this.template('app/page.js', 'app/page.js');
   this.copy('app/layouts/main.js', 'app/layouts/main.js');
   this.copy('app/layouts/not-found.js', 'app/layouts/not-found.js');
   this.copy('app/views/app/app.js', 'app/views/app/app.js');

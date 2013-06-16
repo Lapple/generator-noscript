@@ -114,12 +114,11 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'public/js/app.js': [
-                        'app/routes.js',
                         'app/models/**/*.js',
                         'app/layouts/*.js',
                         'app/views/**/*.js',
                         'app/actions/**/*.js',
-                        'app/init.js'
+                        'app/*.js'
                     ],
                     'public/js/components.js': [
                         'vendor/jquery/jquery.js',
