@@ -30,8 +30,8 @@ app.use(express.methodOverride());
 app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.post('models/', require('./models'));
-app.get('*', require('./index'));
+app.post('/models/', require('./models'));
+app.get('/*', require('./index'));
 
 app.listen(app.get('port'));
 console.log('Listening on port %s', app.get('port'));
