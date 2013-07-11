@@ -124,9 +124,8 @@ module.exports = function (grunt) {
                         'vendor/jquery/jquery.js',
 
                         // Nommon section.
-                        '<%= nommon %>/no.js',
+                        '<%= nommon %>/no.base.js',
                         '<%= nommon %>/no.events.js',
-                        '<%= nommon %>/no.path.js',
                         '<%= nommon %>/no.parser.js',
                         '<%= nommon %>/no.promise.js',
                         '<%= nommon %>/no.jpath.js',
@@ -136,6 +135,7 @@ module.exports = function (grunt) {
                         'vendor/noscript/src/ns.consts.js',
                         'vendor/noscript/src/ns.consts.events.js',
                         'vendor/noscript/src/ns.dom.js',
+                        'vendor/noscript/src/ns.entityify.js',
                         'vendor/noscript/src/ns.http.js',
                         'vendor/noscript/src/ns.log.js',
                         'vendor/noscript/src/ns.object.js',
@@ -143,12 +143,14 @@ module.exports = function (grunt) {
                         'vendor/noscript/src/ns.box.js',
                         'vendor/noscript/src/ns.layout.js',
                         'vendor/noscript/src/ns.model.js',
+                        'vendor/noscript/src/ns.modelCollection.js',
                         'vendor/noscript/src/ns.page.js',
                         'vendor/noscript/src/ns.history.js',
                         'vendor/noscript/src/ns.request.js',
                         'vendor/noscript/src/ns.router.js',
                         'vendor/noscript/src/ns.update.js',
-                        'vendor/noscript/src/ns.view.js'
+                        'vendor/noscript/src/ns.view.js',
+                        'vendor/noscript/src/ns.viewCollection.js'
                     ]
                 }
             },
