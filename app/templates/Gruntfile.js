@@ -1,7 +1,6 @@
 'use strict';
 
 var path = require('path');
-var child = require('child_process');
 
 module.exports = function (grunt) {
 
@@ -12,6 +11,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-yate');
+    grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     grunt.initConfig({
 
@@ -59,7 +60,6 @@ module.exports = function (grunt) {
                 files: [
                     'public/js/*.js',
                     'public/css/*.css',
-                    'server/views/*.tmpl.js',
                     '!public/js/*.min.js',
                     '!public/css/*.min.css',
                 ],
@@ -184,18 +184,35 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        express: {
-            options: {
-                main: 'server/server.js',
-                port: 3000
-            }
-        },
         clean: {
             build: [
                 'public/js/*.js',
                 'public/css/*.css',
                 'server/views/*.tmpl.js'
             ]
+        },
+        nodemon: {
+            server: {
+                options: {
+                    file: 'server/server.js',
+                    args: [
+                        '--port', 3000,
+                        '--livereload', '<%= livereload %>'
+                    ],
+                    watchedFolders: ['server']
+                }
+            }
+        },
+        concurrent: {
+            watchers: {
+                tasks: [
+                    'nodemon',
+                    'watch'
+                ],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
         }
 
     });
@@ -214,29 +231,7 @@ module.exports = function (grunt) {
         'yate',
         'stylus',
         'concat',
-        'express',
+        'concurrent:watchers',
         'watch'
     ]);
-
-    grunt.registerTask('express', function () {
-        var options = this.options();
-
-        var server = child.spawn('node', [
-            options.main,
-            '--port',
-            options.port,
-            '--livereload',
-            grunt.config('livereload')
-        ]);
-
-        server.stdout.on('data', function (data) {
-            console.log('\n' + '[express]'.yellow + '\n%s', data);
-        });
-
-        server.stderr.on('data', function (data) {
-            console.error('\n' + '[express]'.red + '\n%s', data);
-        });
-
-        process.on('exit', server.kill);
-    });
 };
