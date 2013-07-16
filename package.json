@@ -1,6 +1,6 @@
 {
   "name": "generator-noscript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Noscript project generator for Yeoman",
   "keywords": [
     "yeoman-generator"
