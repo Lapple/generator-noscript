@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "yeoman-generator": "~0.10.2",
-    "underscore.string": "~2.3.1"
+    "underscore.string": "~2.3.1",
+    "inflect-js": "~1.0.0"
   },
   "devDependencies": {
     "mocha": "~1.9.0"

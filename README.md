@@ -85,9 +85,12 @@ Generates `ns.Model` definition and pairs it with server-side model retrieval
 module. Note that dasherized or underscored names are camel-cased as per
 convention.
 
+Pass `--collection` option to generate `ns.ModelCollection` definition.
+
 Example:
 
     yo noscript:model sampleModel
+    yo noscript:model sampleModels --collection
 
 ### View
 
@@ -95,9 +98,12 @@ Generates `ns.View` definition with a corresponding
 [Yate](https://github.com/pasaran/yate/) template. Note that dasherized or
 underscored names are camel-cased as per convention.
 
+Pass `--collection` option to generate `ns.ViewCollection` definition.
+
 Example:
 
     yo noscript:view sampleView
+    yo noscript:view sampleViews --collection
 
 ### List
 
