@@ -11,6 +11,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-yate');
+    grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
 
@@ -121,6 +122,7 @@ module.exports = function (grunt) {
                         'app/*.js'
                     ],
                     'public/js/components.js': [
+                        'node_modules/es5-shim/es5-shim.js',
                         'vendor/jquery/jquery.js',
 
                         // Nommon section.
@@ -159,6 +161,13 @@ module.exports = function (grunt) {
                     'public/css/main.css': [
                         'vendor/noscript/css/*.css',
                         'public/css/main.css'
+                    ]
+                }
+            },
+            tests: {
+                files: {
+                    'public/js/tests.js': [
+                        'tests/spec/**/*.js'
                     ]
                 }
             }
@@ -213,6 +222,17 @@ module.exports = function (grunt) {
                     logConcurrentOutput: true
                 }
             }
+        },
+        mocha: {
+            tests: {
+                src: [
+                    'tests/tests.html'
+                ],
+                options: {
+                    log: true,
+                    run: true
+                }
+            }
         }
 
     });
@@ -221,7 +241,8 @@ module.exports = function (grunt) {
         'clean',
         'yate',
         'stylus',
-        'concat',
+        'concat:js',
+        'concat:css',
         'uglify',
         'cssmin'
     ]);
@@ -230,8 +251,15 @@ module.exports = function (grunt) {
         'clean',
         'yate',
         'stylus',
-        'concat',
-        'concurrent:watchers',
-        'watch'
+        'concat:js',
+        'concat:css',
+        'concurrent:watchers'
+    ]);
+
+    grunt.registerTask('test', [
+        'yate:templates',
+        'concat:js',
+        'concat:tests',
+        'mocha'
     ]);
 };

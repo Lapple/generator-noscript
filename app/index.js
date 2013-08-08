@@ -42,8 +42,8 @@ NoscriptGenerator.prototype.askFor = function askFor() {
     {
       type: 'confirm',
       name: 'bare',
-      message: 'Generate bare project without sample views?',
-      default: 'Y/n'
+      message: 'Generate sample views?',
+      default: 'y/N'
     }
   ];
 
@@ -53,7 +53,7 @@ NoscriptGenerator.prototype.askFor = function askFor() {
     }
 
     this.projectName = props.projectName;
-    this.bare = /y/gi.test(props.bare);
+    this.bare = /n/gi.test(props.bare);
 
     cb();
   }.bind(this));
@@ -73,6 +73,8 @@ NoscriptGenerator.prototype.app = function app() {
 
   this.mkdir('vendor');
   this.mkdir('styles');
+  this.mkdir('tests');
+  this.mkdir('tests/spec');
 
   this.copy('app/routes.js', 'app/routes.js');
   this.copy('app/init.js', 'app/init.js');
@@ -80,6 +82,9 @@ NoscriptGenerator.prototype.app = function app() {
   this.template('app/layouts/main.js', 'app/layouts/main.js');
   this.template('app/layouts/not-found.js', 'app/layouts/not-found.js');
   this.copy('app/views/app/app.js', 'app/views/app/app.js');
+
+  this.template('tests/tests.html', 'tests/tests.html');
+  this.copy('tests/spec/router.js', 'tests/spec/router.js');
 
   if (!this.bare) {
     this.copy('app/views/welcome/welcome.js', 'app/views/welcome/welcome.js');
