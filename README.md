@@ -54,6 +54,10 @@ app. Sets up the following folder structure:
   models.js     - models connector
   index.js      - main application template renderer
 
+/tests          Tests folder
+  /spec         Spec folder
+  tests.html    Test-runner file
+
 /vendor         Folder, containing bower-installed dependencies
 /styles         Project CSS written in Stylus
 

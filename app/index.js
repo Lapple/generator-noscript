@@ -83,9 +83,6 @@ NoscriptGenerator.prototype.app = function app() {
   this.template('app/layouts/not-found.js', 'app/layouts/not-found.js');
   this.copy('app/views/app/app.js', 'app/views/app/app.js');
 
-  this.template('tests/tests.html', 'tests/tests.html');
-  this.copy('tests/spec/router.js', 'tests/spec/router.js');
-
   if (!this.bare) {
     this.copy('app/views/welcome/welcome.js', 'app/views/welcome/welcome.js');
     this.template('app/views/welcome/welcome.yate', 'app/views/welcome/welcome.yate');
@@ -99,6 +96,9 @@ NoscriptGenerator.prototype.app = function app() {
   this.template('server/index.js', 'server/index.js');
   this.template('server/models.js', 'server/models.js');
   this.template('server/views/index.yate', 'server/views/index.yate');
+
+  this.template('tests/tests.html', 'tests/tests.html');
+  this.copy('tests/spec/router.js', 'tests/spec/router.js');
 };
 
 NoscriptGenerator.prototype.projectfiles = function projectfiles() {
