@@ -17,9 +17,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
 
-        nommon: path.dirname(require.resolve('nommon')),
         livereload: 35729,
-
         watch: {
             options: {
                 interrupt: true
@@ -76,7 +74,7 @@ module.exports = function (grunt) {
             templates: {
                 files: {
                     'public/js/templates.js': [
-                        'vendor/noscript/yate/*.yate',
+                        'node_modules/noscript/yate/*.yate',
                         'app/views/**/*.yate'
                     ]
                 }
@@ -124,42 +122,14 @@ module.exports = function (grunt) {
                     'public/js/components.js': [
                         'node_modules/es5-shim/es5-shim.js',
                         'vendor/jquery/jquery.js',
-
-                        // Nommon section.
-                        '<%= nommon %>/no.base.js',
-                        '<%= nommon %>/no.events.js',
-                        '<%= nommon %>/no.parser.js',
-                        '<%= nommon %>/no.promise.js',
-                        '<%= nommon %>/no.jpath.js',
-
-                        // Noscript section.
-                        'vendor/noscript/src/ns.js',
-                        'vendor/noscript/src/ns.consts.js',
-                        'vendor/noscript/src/ns.consts.events.js',
-                        'vendor/noscript/src/ns.dom.js',
-                        'vendor/noscript/src/ns.entityify.js',
-                        'vendor/noscript/src/ns.http.js',
-                        'vendor/noscript/src/ns.log.js',
-                        'vendor/noscript/src/ns.object.js',
-                        'vendor/noscript/src/ns.action.js',
-                        'vendor/noscript/src/ns.box.js',
-                        'vendor/noscript/src/ns.layout.js',
-                        'vendor/noscript/src/ns.model.js',
-                        'vendor/noscript/src/ns.modelCollection.js',
-                        'vendor/noscript/src/ns.page.js',
-                        'vendor/noscript/src/ns.history.js',
-                        'vendor/noscript/src/ns.request.js',
-                        'vendor/noscript/src/ns.router.js',
-                        'vendor/noscript/src/ns.update.js',
-                        'vendor/noscript/src/ns.view.js',
-                        'vendor/noscript/src/ns.viewCollection.js'
+                        'node_modules/noscript/dist/noscript.js'
                     ]
                 }
             },
             css: {
                 files: {
                     'public/css/main.css': [
-                        'vendor/noscript/css/*.css',
+                        'node_modules/noscript/css/*.css',
                         'public/css/main.css'
                     ]
                 }

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "yate": "0.0.46",
-    "nommon": "0.0.23",
+    "noscript": "~0.1.4",
     "express": "~3.2.6",
     "optimist": "~0.5.2",
     "lodash": "~1.2.1",
