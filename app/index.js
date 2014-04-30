@@ -25,10 +25,10 @@ NoscriptGenerator.prototype.askFor = function askFor() {
 
   var welcome = [
     '                               _       __ ',
-    '   ' + '____'.bold + '  ____  ' + '_____'.bold + '__________(_)___  / /_',
-    '  ' + '/ __ \\'.bold + '/ __ \\' + '/ ___/'.bold + ' ___/ ___/ / __ \\/ __/',
-    ' / / / /'.bold + ' /_/ ' + '(__  )'.bold + ' /__/ /  / / /_/ / /_  ',
-    '/_/ /_/'.bold + '\\____' + '/____/'.bold + '\\___/_/  /_/ .___/\\__/  ',
+    '   ____  ____  _______________(_)___  / /_',
+    '  / __ \\/ __ \\/ ___/ ___/ ___/ / __ \\/ __/',
+    ' / / / / /_/ (__  ) /__/ /  / / /_/ / /_  ',
+    '/_/ /_/\\____/____/\\___/_/  /_/ .___/\\__/  ',
     '                            /_/           '
   ].join('\n');
 
@@ -103,9 +103,7 @@ NoscriptGenerator.prototype.app = function app() {
 
 NoscriptGenerator.prototype.projectfiles = function projectfiles() {
   this.template('_package.json', 'package.json');
-  this.template('_bower.json', 'bower.json');
   this.template('_README.md', 'README.md');
-  this.template('bowerrc', '.bowerrc');
 
   this.copy('Gruntfile.js', 'Gruntfile.js');
 

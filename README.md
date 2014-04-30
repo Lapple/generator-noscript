@@ -5,9 +5,9 @@ A [noscript](https://github.com/pasaran/noscript/) project generator for Yeoman.
 
 ## Getting started
 
-Make sure you have [yo](https://github.com/yeoman/yo), [grunt-cli](https://github.com/gruntjs/grunt-cli) and [bower](https://github.com/bower/bower) installed:
+Make sure you have [yo](https://github.com/yeoman/yo) and [grunt-cli](https://github.com/gruntjs/grunt-cli) installed:
 
-    npm install -g yo grunt-cli bower
+    npm install -g yo grunt-cli
 
 Install the generator:
 
