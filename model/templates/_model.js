@@ -1,4 +1,4 @@
-ns.Model.define('<%= modelName %>', {
+module.exports = ns.Model.define('<%= modelName %>', {
     params: {},
     methods: {
         // <%= modelName %> prototype methods...

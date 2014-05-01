@@ -1,1 +1,1 @@
-ns.View.define('welcome');
+module.exports = ns.View.define('welcome');

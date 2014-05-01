@@ -1,3 +1,6 @@
+require('./view-app');<% if (!bare) { %>
+require('./view-welcome');<% } %>
+
 ns.layout.define('main', {
 
     // The `app` view should serve as a root of

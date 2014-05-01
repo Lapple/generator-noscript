@@ -1,4 +1,6 @@
-ns.ViewCollection.define('<%= viewName %>', {
+require('./<%= childViewFileName %>');
+
+module.exports = ns.ViewCollection.define('<%= viewName %>', {
     models: [],
     split: {
         view_id: '<%= childViewName %>'

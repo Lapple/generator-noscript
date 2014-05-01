@@ -1,4 +1,4 @@
-ns.View.define('<%= viewName %>', {
+module.exports = ns.View.define('<%= viewName %>', {
     models: [],
     events: {
         // <%= viewName %> events...

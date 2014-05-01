@@ -1,12 +1,9 @@
-(function(ns) {
-
+module.exports = function() {
     ns.page.title = function(url) {
         return '<%= projectName %> ' + url;
     };
 
-    $(function() {
-        ns.init();
-        ns.page.go();
-    });
+    ns.init();
 
-}(ns));
+    return ns.page.go();
+};

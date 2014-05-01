@@ -6,7 +6,7 @@ match .welcome ns-view-content {
         <p class="welcome__paragraph">
             "This is a sample ns.View"
             " template content. The HTML is located in "
-            "app/views/welcome/welcome.yate."
+            "app/view-welcome.yate."
         </p>
         <p class="welcome__paragraph">
             "To start developing your own application take "
@@ -15,7 +15,7 @@ match .welcome ns-view-content {
         </p>
         <p class="welcome__paragraph">
             <a class="welcome__link">
-                @href = "https://github.com/pasaran/noscript"
+                @href = "https://github.com/yandex-ui/noscript"
                 @title = "Noscript project page"
                 @target = "_blank"
                 "Noscript"

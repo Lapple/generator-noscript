@@ -38,8 +38,8 @@ app. Sets up the following folder structure:
   view-*.js       - ns.Views
   model-*.js      - ns.Models
   layout-*.js     - ns.Layouts
-  routes.js       - route definitions
   init.js         - initialization code
+  app.js          - layout inclusion and route definitions
 
 /server           Folder, containing back-end, Express powered code:
   page-*.yate     - Yate templates for different pages
@@ -109,9 +109,9 @@ Lists views, models or layouts currently present in the project.
 
 Example:
 
-    yo noscript:list views
-    yo noscript:list models
-    yo noscript:list layouts
+    yo noscript:list view
+    yo noscript:list model
+    yo noscript:list layout
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)

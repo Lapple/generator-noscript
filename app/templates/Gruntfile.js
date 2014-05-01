@@ -15,37 +15,47 @@ module.exports = function (grunt) {
                 files: ['app/*.yate'],
                 tasks: ['yate:templates']
             },
-            views: {
+            pages: {
                 files: ['server/*.yate'],
                 tasks: ['yate:server']
             },
-            js: {
-                files: ['app/*.js'],
-                tasks: ['concat:js']
-            },
             styles: {
                 files: ['styles/**/*.styl'],
-                tasks: ['stylus', 'concat:css']
+                tasks: ['stylus']
             },
             livereload: {
                 files: [
-                    'public/js/*.js',
-                    'public/*.css',
-                    '!public/js/*.min.js',
-                    '!public/*.min.css',
+                    'public/*.{js,css}',
+                    '!public/*.min.{js,css}',
                 ],
                 options: {
                     livereload: '<%= livereload %>'
                 }
             }
         },
+        browserify: {
+            options: {
+                watch: grunt.option('development'),
+                keepAlive: grunt.option('development'),
+                bundleOptions: {
+                    // Enable source maps.
+                    debug: grunt.option('development')
+                }
+            },
+            app: {
+                files: {
+                    'public/app.js': 'app/app.js'
+                }
+            }
+        },
         yate: {
             options: {
-                runtime: true
+                runtime: true,
+                writeAST: true
             },
             templates: {
                 files: {
-                    'public/js/templates.js': [
+                    'public/templates.js': [
                         'node_modules/noscript/yate/*.yate',
                         'app/view-*.yate'
                     ]
@@ -76,35 +86,20 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            js: {
-                options: {
-                    separator: ';'
-                },
+            options: {
+                separator: ';'
+            },
+            libs: {
                 files: {
-                    'public/js/app.js': [
-                        'app/models/**/*.js',
-                        'app/layouts/*.js',
-                        'app/views/**/*.js',
-                        'app/actions/**/*.js',
-                        'app/*.js'
-                    ],
-                    'public/js/components.js': [
+                    'public/libs.js': [
                         'node_modules/es5-shim/es5-shim.js',
                         'node_modules/noscript/dist/noscript.js'
                     ]
                 }
             },
-            css: {
-                files: {
-                    'public/main.css': [
-                        'node_modules/noscript/css/*.css',
-                        'public/main.css'
-                    ]
-                }
-            },
             tests: {
                 files: {
-                    'public/js/tests.js': [
+                    'public/tests.js': [
                         'tests/spec/**/*.js'
                     ]
                 }
@@ -113,11 +108,11 @@ module.exports = function (grunt) {
         uglify: {
             js: {
                 src: [
-                    'public/js/components.js',
-                    'public/js/templates.js',
-                    'public/js/app.js'
+                    'public/libs.js',
+                    'public/templates.js',
+                    'public/app.js'
                 ],
-                dest: 'public/js/app.min.js'
+                dest: 'public/app.min.js'
             }
         },
         cssmin: {
@@ -133,8 +128,7 @@ module.exports = function (grunt) {
         },
         clean: {
             build: [
-                'public/*.css',
-                'public/js/*.js',
+                'public/*.{js,css}',
                 'server/*.tmpl.js'
             ]
         },
@@ -152,10 +146,7 @@ module.exports = function (grunt) {
         },
         concurrent: {
             watchers: {
-                tasks: [
-                    'nodemon',
-                    'watch'
-                ],
+                tasks: ['nodemon', 'browserify', 'watch'],
                 options: {
                     logConcurrentOutput: true
                 }
@@ -163,9 +154,7 @@ module.exports = function (grunt) {
         },
         mocha: {
             tests: {
-                src: [
-                    'tests/tests.html'
-                ],
+                src: ['tests/tests.html'],
                 options: {
                     log: true,
                     run: true
@@ -179,8 +168,8 @@ module.exports = function (grunt) {
         'clean',
         'yate',
         'stylus',
-        'concat:js',
-        'concat:css',
+        'browserify',
+        'concat:libs',
         'uglify',
         'cssmin'
     ]);
@@ -189,14 +178,14 @@ module.exports = function (grunt) {
         'clean',
         'yate',
         'stylus',
-        'concat:js',
-        'concat:css',
+        'concat:libs',
         'concurrent:watchers'
     ]);
 
     grunt.registerTask('test', [
         'yate:templates',
-        'concat:js',
+        'browserify',
+        'concat:libs',
         'concat:tests',
         'mocha'
     ]);

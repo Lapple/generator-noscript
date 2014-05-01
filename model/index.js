@@ -20,7 +20,8 @@ var ModelGenerator = module.exports = function ModelGenerator(args, options) {
     }
 
     if (this.isCollection) {
-        this.submodelName = inflect.singularize(this.modelName);
+        this.childModelName = inflect.singularize(this.modelName);
+        this.childModelFileName = inflect.singularize(this.fileName);
     }
 
     this.log.create('model ' + this.modelName);

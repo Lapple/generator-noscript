@@ -20,13 +20,13 @@ match / {
 }
 
 match / javascripts {
-    <script type="text/javascript" src="/js/app.min.js" />
+    <script type="text/javascript" src="/app.min.js" />
 }
 
 match /[ .settings.env == 'development' ] javascripts {
-    <script type="text/javascript" src="/js/components.js" />
-    <script type="text/javascript" src="/js/templates.js" />
-    <script type="text/javascript" src="/js/app.js" />
+    <script type="text/javascript" src="/libs.js" />
+    <script type="text/javascript" src="/templates.js" />
+    <script type="text/javascript" src="/app.js" />
 
     if .settings.livereload {
         <script>

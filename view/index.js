@@ -21,6 +21,7 @@ var ViewGenerator = module.exports = function ViewGenerator(args, options) {
 
     if (this.isCollection) {
         this.childViewName = inflect.singularize(this.viewName);
+        this.childViewFileName = inflect.singularize(this.fileName);
     }
 
     this.log.create('view ' + this.viewName);

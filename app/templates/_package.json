@@ -5,7 +5,7 @@
   "scripts": {
     "test": "./node_modules/.bin/grunt test",
     "build": "./node_modules/.bin/grunt build",
-    "serve": "./node_modules/.bin/grunt serve"
+    "serve": "./node_modules/.bin/grunt serve --development"
   },
   "dependencies": {
     "async": "~0.8.0",
@@ -23,8 +23,8 @@
   "devDependencies": {
     "expect.js": "~0.3.1",
     "grunt": "~0.4.2",
-    "grunt-cli": "~0.1.13",
     "grunt-browserify": "~2.0.8",
+    "grunt-cli": "~0.1.13",
     "grunt-concurrent": "~0.5.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.4.0",
@@ -37,6 +37,7 @@
     "grunt-yate": "~0.0.16",
     "load-grunt-tasks": "~0.4.0",
     "mocha": "~1.18.2",
+    "normalize.css": "~3.0.1",
     "sinon": "~1.9.1"
   },
   "engines": {

@@ -1,7 +1,9 @@
-ns.Model.define('<%= modelName %>', {
+require('./<%= childModelFileName %>');
+
+module.exports = ns.Model.define('<%= modelName %>', {
     params: {},
     split: {
-        model_id: '<%= submodelName %>',
+        model_id: '<%= childModelName %>',
         items: '.',
         params: {}
     },

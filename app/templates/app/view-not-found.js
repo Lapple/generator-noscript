@@ -1,1 +1,1 @@
-ns.View.define('notFound');
+module.exports = ns.View.define('notFound');
