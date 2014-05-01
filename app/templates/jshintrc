@@ -1,5 +1,6 @@
 {
     "node": true,
+    "jquery": true,
     "es5": true,
     "esnext": true,
     "bitwise": true,
@@ -16,5 +17,6 @@
     "undef": true,
     "unused": true,
     "trailing": true,
-    "smarttabs": true
+    "smarttabs": true,
+    "predef": ["ns", "no", "yr"]
 }
