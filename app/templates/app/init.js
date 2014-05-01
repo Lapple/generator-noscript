@@ -1,14 +1,12 @@
 (function(ns) {
 
-    if ($) {
-        $(init);
-    } else {
-        document.addEventListener('DOMContentLoaded', init, false);
-    }
+    ns.page.title = function(url) {
+        return '<%= projectName %> ' + url;
+    };
 
-    function init() {
+    $(function() {
         ns.init();
         ns.page.go();
-    }
+    });
 
 }(ns));

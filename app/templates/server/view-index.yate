@@ -1,9 +1,6 @@
 match / {
     html('<!doctype html>')
-    html('<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->')
-    html('<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->')
-    html('<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->')
-    html('<!--[if gt IE 8]><!--> <html> <!--<![endif]-->')
+    <html>
         <head>
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -19,7 +16,7 @@ match / {
             <script src="//yandex.st/jquery/1.11.0/jquery.min.js" />
             apply . javascripts
         </body>
-    html('</html>')
+    </html>
 }
 
 match / javascripts {
@@ -39,9 +36,9 @@ match /[ .settings.env == 'development' ] javascripts {
 }
 
 match / stylesheets {
-    <link rel="stylesheet" type="text/css" href="/css/main.min.css" />
+    <link rel="stylesheet" type="text/css" href="/main.min.css" />
 }
 
 match /[ .settings.env == 'development' ] stylesheets {
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
 }

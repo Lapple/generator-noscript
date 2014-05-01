@@ -1,11 +1,11 @@
-var path = require('path');
+'use strict';
 
 var _ = require('lodash');
 var _s = require('underscore.string');
 var async = require('async');
 
 function extractModels(params) {
-    return _.values(_.reduce(params, function (memo, value, key) {
+    return _.values(_.reduce(params, function(memo, value, key) {
         var index = key.split('.').pop();
         var param = key.slice(0, -(index.length + 1));
 
@@ -30,10 +30,10 @@ function getModel(params, callback) {
     }
 }
 
-module.exports = function (req, res) {
+module.exports = function(req, res) {
     var params = _.extend({}, req.params, req.body);
 
-    async.map(extractModels(params), getModel, function (err, models) {
+    async.map(extractModels(params), getModel, function(err, models) {
         if (err) {
             res.json({
                 error: err.message || err

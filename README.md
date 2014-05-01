@@ -18,7 +18,7 @@ Make a new directory and `cd` into it:
     mkdir new-ns-project && cd $_
 
 Run `yo noscript` and answer some prompts. After the dependencieas are
-installed run `grunt build` to assemble the project or `grunt server` to
+installed run `grunt build` to assemble the project or `grunt serve` to
 start local development server.
 
 ## Generators
@@ -58,11 +58,9 @@ app. Sets up the following folder structure:
   /spec         Spec folder
   tests.html    Test-runner file
 
-/vendor         Folder, containing bower-installed dependencies
 /styles         Project CSS written in Stylus
 
 package.json
-bower.json
 Grunfile.js
 ```
 
@@ -70,7 +68,7 @@ Grunfile.js
 
 - `grunt build` assembles the project, building templates and concatenating
 scripts,
-- `grunt server` builds the project and starts up a local instance
+- `grunt serve` builds the project and starts up a local instance
 of express server with livereload.
 
 The generated app will use:

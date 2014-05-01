@@ -2,16 +2,7 @@
 
 module.exports = function (grunt) {
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-stylus');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-yate');
-    grunt.loadNpmTasks('grunt-mocha');
-    grunt.loadNpmTasks('grunt-nodemon');
-    grunt.loadNpmTasks('grunt-concurrent');
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
 
@@ -21,44 +12,27 @@ module.exports = function (grunt) {
                 interrupt: true
             },
             templates: {
-                files: [
-                    'app/views/**/*.yate'
-                ],
-                tasks: [
-                    'yate:templates'
-                ]
+                files: ['app/views/**/*.yate'],
+                tasks: ['yate:templates']
             },
             views: {
-                files: [
-                    'server/views/*.yate'
-                ],
-                tasks: [
-                    'yate:server'
-                ]
+                files: ['server/*.yate'],
+                tasks: ['yate:server']
             },
             js: {
-                files: [
-                    'app/**/*.js'
-                ],
-                tasks: [
-                    'concat:js'
-                ]
+                files: ['app/*.js'],
+                tasks: ['concat:js']
             },
             styles: {
-                files: [
-                    'styles/**/*.styl'
-                ],
-                tasks: [
-                    'stylus',
-                    'concat:css'
-                ]
+                files: ['styles/**/*.styl'],
+                tasks: ['stylus', 'concat:css']
             },
             livereload: {
                 files: [
                     'public/js/*.js',
-                    'public/css/*.css',
+                    'public/*.css',
                     '!public/js/*.min.js',
-                    '!public/css/*.min.css',
+                    '!public/*.min.css',
                 ],
                 options: {
                     livereload: '<%= livereload %>'
@@ -73,7 +47,7 @@ module.exports = function (grunt) {
                 files: {
                     'public/js/templates.js': [
                         'node_modules/noscript/yate/*.yate',
-                        'app/views/**/*.yate'
+                        'app/views/*.yate'
                     ]
                 }
             },
@@ -83,9 +57,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    flatten: true,
-                    src: 'server/views/*.yate',
-                    dest: 'server/views/',
+                    cwd: 'server',
+                    src: '*.yate',
+                    dest: 'server',
                     ext: '.tmpl.js'
                 }]
             }
@@ -93,14 +67,11 @@ module.exports = function (grunt) {
         stylus: {
             options: {
                 'include css': true,
-                compress: false,
-                import: [
-                    'nib'
-                ]
+                compress: false
             },
             main: {
                 files: {
-                    'public/css/main.css': 'styles/main.styl'
+                    'public/main.css': 'styles/main.styl'
                 }
             }
         },
@@ -119,16 +90,15 @@ module.exports = function (grunt) {
                     ],
                     'public/js/components.js': [
                         'node_modules/es5-shim/es5-shim.js',
-                        'vendor/jquery/jquery.js',
                         'node_modules/noscript/dist/noscript.js'
                     ]
                 }
             },
             css: {
                 files: {
-                    'public/css/main.css': [
+                    'public/main.css': [
                         'node_modules/noscript/css/*.css',
-                        'public/css/main.css'
+                        'public/main.css'
                     ]
                 }
             },
@@ -154,29 +124,29 @@ module.exports = function (grunt) {
             css: {
                 files: [{
                     expand: true,
-                    flatten: true,
-                    ext: '.min.css',
-                    src: 'public/css/*.css',
-                    dest: 'public/css/'
+                    cwd: 'public',
+                    src: '*.css',
+                    dest: 'public',
+                    ext: '.min.css'
                 }]
             }
         },
         clean: {
             build: [
+                'public/*.css',
                 'public/js/*.js',
-                'public/css/*.css',
                 'server/views/*.tmpl.js'
             ]
         },
         nodemon: {
             server: {
+                script: 'server/server.js',
                 options: {
-                    file: 'server/server.js',
                     args: [
                         '--port', 3000,
                         '--livereload', '<%= livereload %>'
                     ],
-                    watchedFolders: ['server']
+                    watch: ['server']
                 }
             }
         },
@@ -215,7 +185,7 @@ module.exports = function (grunt) {
         'cssmin'
     ]);
 
-    grunt.registerTask('server', [
+    grunt.registerTask('serve', [
         'clean',
         'yate',
         'stylus',

@@ -1,5 +1,4 @@
 node_modules
-vendor
 public
 
-server/views/*.tmpl.js
+server/*.tmpl.js

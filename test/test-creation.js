@@ -36,10 +36,8 @@ describe('noscript generator', function () {
       'tests/tests.html',
       'tests/spec/router.js',
       'package.json',
-      'bower.json',
       'README.md',
       'Gruntfile.js',
-      '.bowerrc',
       '.gitignore',
       '.jshintrc',
       '.editorconfig'
