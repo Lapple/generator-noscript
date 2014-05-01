@@ -17,7 +17,7 @@ function extractModels(params) {
 }
 
 function getModelPath(model) {
-    return './models/' + _s.dasherize(model).replace(/^\-/, '');
+    return './model-' + _s.dasherize(model).replace(/^\-/, '');
 }
 
 function getModel(params, callback) {
