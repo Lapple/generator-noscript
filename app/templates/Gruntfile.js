@@ -12,7 +12,7 @@ module.exports = function (grunt) {
                 interrupt: true
             },
             templates: {
-                files: ['app/views/**/*.yate'],
+                files: ['app/*.yate'],
                 tasks: ['yate:templates']
             },
             views: {
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
                 files: {
                     'public/js/templates.js': [
                         'node_modules/noscript/yate/*.yate',
-                        'app/views/*.yate'
+                        'app/view-*.yate'
                     ]
                 }
             },
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'server',
-                    src: '*.yate',
+                    src: 'page-*.yate',
                     dest: 'server',
                     ext: '.tmpl.js'
                 }]
