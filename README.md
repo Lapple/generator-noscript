@@ -69,9 +69,13 @@ of express server with livereload.
 
 The generated app will use:
 
-- [Yate](https://github.com/pasaran/yate/) for templates,
+- [Yate](https://github.com/pasaran/yate/) as a templating engine,
 - [Stylus](https://github.com/learnboost/stylus) for CSS preprocessing,
 - [Express](https://github.com/visionmedia/express) as backend router and server.
+
+Build and run it in production mode using:
+
+    npm run build && npm start
 
 Example:
 
