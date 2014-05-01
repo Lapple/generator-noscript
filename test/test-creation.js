@@ -19,7 +19,7 @@ describe('noscript generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      'app/routes.js',
+      'app/app.js',
       'app/init.js',
       'app/layout-main.js',
       'app/layout-not-found.js',
@@ -31,7 +31,8 @@ describe('noscript generator', function () {
       'server/server.js',
       'server/route-index.js',
       'server/route-models.js',
-      'server/view-index.yate',
+      'server/engine-yate.js',
+      'server/page-index.yate',
       'tests/tests.html',
       'tests/spec/router.js',
       'package.json',
