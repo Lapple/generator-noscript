@@ -135,7 +135,7 @@ module.exports = function (grunt) {
             build: [
                 'public/*.css',
                 'public/js/*.js',
-                'server/views/*.tmpl.js'
+                'server/*.tmpl.js'
             ]
         },
         nodemon: {

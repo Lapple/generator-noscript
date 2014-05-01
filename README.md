@@ -5,9 +5,9 @@ A [noscript](https://github.com/pasaran/noscript/) project generator for Yeoman.
 
 ## Getting started
 
-Make sure you have [yo](https://github.com/yeoman/yo) and [grunt-cli](https://github.com/gruntjs/grunt-cli) installed:
+Make sure you have [yo](https://github.com/yeoman/yo) installed:
 
-    npm install -g yo grunt-cli
+    npm install -g yo
 
 Install the generator:
 
@@ -18,7 +18,7 @@ Make a new directory and `cd` into it:
     mkdir new-ns-project && cd $_
 
 Run `yo noscript` and answer some prompts. After the dependencieas are
-installed run `grunt build` to assemble the project or `grunt serve` to
+installed run `npm run build` to assemble the project or `npm run serve` to
 start local development server.
 
 ## Generators
@@ -38,37 +38,37 @@ Generates most of the boilerplate code you need to get started with a noscript
 app. Sets up the following folder structure:
 
 ```
-/app            Folder, containing your front-end code:
-  /views        - ns.Views
-  /models       - ns.Models
-  /layouts      - ns.Layouts
-  /actions      - ns.Actions
-  /components   - non-ns code, e.g. widgets or helpers
-  routes.js     - route definitions
-  init.js       - initialization code
+/app              Folder, containing your front-end code:
+  view-*.js       - ns.Views
+  model-*.js      - ns.Models
+  layout-*.js     - ns.Layouts
+  routes.js       - route definitions
+  init.js         - initialization code
 
-/server         Folder, containing back-end, express powered code:
-  /views        - yate templates
-  /models       - model retrieval modules
-  server.js     - main server-side script
-  models.js     - models connector
-  index.js      - main application template renderer
+/server           Folder, containing back-end, Express powered code:
+  view-*.js       - Yate templates
+  model-*.js      - model retrieval modules
+  server.js       - main server-side script
+  route-models.js - models connector
+  route-index.js  - main application template renderer
+  engine-yate.js  - Yate template engine for Express
 
-/tests          Tests folder
-  /spec         Spec folder
-  tests.html    Test-runner file
+/tests            Tests folder
+  /spec           - spec folder
+  tests.html      - test-runner file
 
-/styles         Project CSS written in Stylus
+/styles           Project CSS written in Stylus
 
 package.json
 Grunfile.js
+README.md
 ```
 
-`Gruntfile` comes bundled with following tasks:
+Build, powered by Grunt, comes bundled with following tasks:
 
-- `grunt build` assembles the project, building templates and concatenating
+- `npm run build` assembles the project, building templates and concatenating
 scripts,
-- `grunt serve` builds the project and starts up a local instance
+- `npm run serve` builds the project and starts up a local instance
 of express server with livereload.
 
 The generated app will use:

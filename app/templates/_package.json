@@ -1,6 +1,12 @@
 {
   "name": "<%= projectName %>",
   "version": "0.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "./node_modules/.bin/grunt test",
+    "build": "./node_modules/.bin/grunt build",
+    "serve": "./node_modules/.bin/grunt serve"
+  },
   "dependencies": {
     "async": "~0.8.0",
     "body-parser": "~1.0.2",
@@ -32,12 +38,6 @@
     "load-grunt-tasks": "~0.4.0",
     "mocha": "~1.18.2",
     "sinon": "~1.9.1"
-  },
-  "main": "server/server.js",
-  "scripts": {
-    "test": "./node_modules/.bin/grunt test",
-    "build": "./node_modules/.bin/grunt build",
-    "serve": "./node_modules/.bin/grunt serve"
   },
   "engines": {
     "node": ">=0.8.0"
