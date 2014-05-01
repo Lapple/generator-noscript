@@ -85,7 +85,6 @@ NoscriptGenerator.prototype.app = function app() {
 
 NoscriptGenerator.prototype.server = function server() {
   this.mkdir('server');
-  this.mkdir('server/models');
 
   this.copy('server/server.js', 'server/server.js');
   this.copy('server/route-index.js', 'server/route-index.js');
@@ -96,6 +95,7 @@ NoscriptGenerator.prototype.server = function server() {
 
 NoscriptGenerator.prototype.styles = function styles() {
   this.mkdir('styles');
+
   this.template('styles/main.styl', 'styles/main.styl');
 };
 

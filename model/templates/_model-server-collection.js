@@ -1,5 +1,7 @@
+'use strict';
+
 /**
- * Return <%= modelName %> instance.
+ * Returns <%= modelName %> instance data.
  * @param  {Object}   params   Model parameters
  * @param  {Function} callback
  */

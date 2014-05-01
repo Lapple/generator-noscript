@@ -5,13 +5,9 @@ A [noscript](https://github.com/pasaran/noscript/) project generator for Yeoman.
 
 ## Getting started
 
-Make sure you have [yo](https://github.com/yeoman/yo) installed:
+Make sure you have [yo](https://github.com/yeoman/yo) and the generator installed:
 
-    npm install -g yo
-
-Install the generator:
-
-    npm install -g generator-noscript
+    npm install -g yo generator-noscript
 
 Make a new directory and `cd` into it:
 

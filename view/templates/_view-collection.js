@@ -1,7 +1,7 @@
 ns.ViewCollection.define('<%= viewName %>', {
     models: [],
     split: {
-        view_id: '<%= subviewName %>'
+        view_id: '<%= childViewName %>'
     },
     events: {
         // <%= viewName %> events...

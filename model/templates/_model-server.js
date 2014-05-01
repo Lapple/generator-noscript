@@ -1,5 +1,7 @@
+'use strict';
+
 /**
- * Return <%= modelName %> instance.
+ * Returns <%= modelName %> instance data.
  * @param  {Object}   params   Model parameters
  * @param  {Function} callback
  */
@@ -8,7 +10,7 @@ module.exports = function(params, callback) {
         // Return either of two keys:
         //
         // - `data` containing model information,
-        // - `error` containing any data-connected errors.
+        // - `error` containing any data-related errors.
         data: {
             model: '<%= modelName %>'
         }

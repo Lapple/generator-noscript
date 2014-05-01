@@ -2,7 +2,7 @@ match .<%= viewName %> ns-view-content {
     // Own collection HTML
 
     <div class="ns-view-container-desc">
-        // Subviews' HTML
-        apply /.views.* ns-view
+        // Child views' HTML
+        apply . ns-view-desc
     </div>
 }
