@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = function(req, res) {
-    res.render('view-index', {});
+    res.render('page-index', {});
 };

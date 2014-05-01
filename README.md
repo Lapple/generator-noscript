@@ -42,7 +42,7 @@ app. Sets up the following folder structure:
   init.js         - initialization code
 
 /server           Folder, containing back-end, Express powered code:
-  view-*.js       - Yate templates
+  page-*.yate     - Yate templates for different pages
   model-*.js      - model retrieval modules
   server.js       - main server-side script
   route-models.js - models connector

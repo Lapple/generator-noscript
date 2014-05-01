@@ -90,7 +90,7 @@ NoscriptGenerator.prototype.server = function server() {
   this.copy('server/route-index.js', 'server/route-index.js');
   this.copy('server/route-models.js', 'server/route-models.js');
   this.copy('server/engine-yate.js', 'server/engine-yate.js');
-  this.template('server/view-index.yate', 'server/view-index.yate');
+  this.template('server/page-index.yate', 'server/page-index.yate');
 };
 
 NoscriptGenerator.prototype.styles = function styles() {
